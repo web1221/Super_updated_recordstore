@@ -39,4 +39,9 @@ class Album
     @@albums.delete(self.id)
   end
 
+  def self.search(query)
+    Album.all.select { |album| album.name.match?(/(#{query})/i)}
+    
+  end
+
 end
