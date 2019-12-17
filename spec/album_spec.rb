@@ -57,4 +57,12 @@ describe('.#Album') do
     end
   end
 
+  describe('.search') do
+    it("returns an array of albums by name") do
+      album3 = Album.new("Red Letter Day", nil)
+      album3.save
+      expect(Album.search('Red')).to(eq([@album2, album3]))
+    end
+  end
+
 end
