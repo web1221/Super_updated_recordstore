@@ -6,8 +6,8 @@ require('rspec')
 describe('.#Album') do
 
   before(:each) do
-    @album1 = Album.new("Blue", nil)
-    @album2 = Album.new("Red", nil)
+    @album1 = Album.new("Blue", 'Hervana', 1994, 'Grunge', nil)
+    @album2 = Album.new("Red", 'T.Swiftly', 2003, 'Pop', nil)
     @album1.save
     @album2.save
   end
@@ -18,7 +18,7 @@ describe('.#Album') do
 
   describe('#==') do
     it("is the same album if it has the same attributes") do
-      album3 = Album.new("Blue", nil)
+      album3 = Album.new("Blue", 'Hervana', 1994, 'Grunge', nil)
       expect(@album1).to(eq(album3))
     end
   end
@@ -45,8 +45,9 @@ describe('.#Album') do
 
   describe('#update') do
     it("updates an album by id") do
-      @album1.update("Yellow")
+      @album1.update("Yellow", "", "", nil)
       expect(@album1.name).to(eq('Yellow'))
+      expect(@album1.artist).to(eq('Hervana'))
     end
   end
 
@@ -59,7 +60,7 @@ describe('.#Album') do
 
   describe('.search') do
     it("returns an array of albums by name") do
-      album3 = Album.new("Red Letter Day", nil)
+      album3 = Album.new("Red Letter Day", 'Death Staves', 2001, 'Rock', nil)
       album3.save
       expect(Album.search('Red')).to(eq([@album2, album3]))
     end

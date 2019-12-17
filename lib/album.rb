@@ -3,10 +3,13 @@ class Album
   @@albums = {}
   @@total_rows = 0
 
-  attr_reader :id, :name
+  attr_reader :id, :name, :year, :genre, :artist
 
-  def initialize(name, id)
+  def initialize(name, artist, year, genre, id)
     @name = name
+    @artist = artist
+    @year = year
+    @genre = genre
     @id = id || @@total_rows += 1
   end
 
@@ -15,11 +18,13 @@ class Album
   end
 
   def save()
-    @@albums[self.id] = Album.new(self.name, self.id)
+    @@albums[self.id] = Album.new(self.name, self.artist, self.year, self.genre, self.id)
   end
 
   def ==(other_album)
     self.name.eql?(other_album.name)
+    self.artist.eql?(other_album.artist)
+    self.year.eql?(other_album.year)
   end
 
   def self.clear
@@ -31,8 +36,11 @@ class Album
     @@albums[id]
   end
 
-  def update(name)
-    @name = name
+  def update(name, artist, year, genre)
+    @name = (name == '') ? self.name : name
+    @artist = (artist == '') ? self.artist : artist
+    @year = (year == '') ? self.year : year
+    @genre = genre || self.genre
   end
 
   def delete
@@ -45,7 +53,6 @@ class Album
 
   def self.search(query)
     Album.all.select { |album| album.name.match?(/(#{query})/i)}
-
   end
 
 end

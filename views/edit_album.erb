@@ -4,10 +4,29 @@
   <input name="_method" type="hidden" value="patch">
 
   <label for="name">Rename Album</label>
-  <input id="name" name="name" type="text">
+  <input class="form-control" name="album_name" type="text">
 
+  <label for="album_artist">Rename Artist</label>
+  <input name="album_artist" class="form-control" type="text">
+
+  <label for="album_year">Change Year</label>
+  <input name="album_year" class="form-control" type="text">
+
+  <label for="album_genre">Change Genre</label>
+  <select name="album_genre" class="form-control">
+    <option selected disabled hidden value=false>No Change</option>
+    <option value="Rock">Rock</option>
+    <option value="Pop">Pop</option>
+    <option value="Noise">Noise</option>
+    <option value="Metal">Metal</option>
+    <option value="Melodic">Melodic</option>
+    <option value="R&B">R&B</option>
+    <option value="Electronic">Electronic</option>
+    <option value="Punk">Punk</option>
+  </select>
   <button type="submit">Update</button>
 </form>
+
 <form action="/albums/<%= @album.id() %>" method="post">
   <input name="_method" type="hidden" value="delete">
 

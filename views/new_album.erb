@@ -1,9 +1,25 @@
 <h1>Add a new album</h1>
 
 <form action="/albums" method="post">
-  <div class="form-group">
     <label for="album_name">Album name</label>
-    <input id="n" name="album_name" class="form-control" type="text">
-  </div>
+    <input id="n" name="album_name" class="form-control" type="text" required>
+
+    <label for="album_artist">Artist</label>
+    <input name="album_artist" class="form-control" type="text" required>
+
+    <label for="album_year">Year</label>
+    <input name="album_year" class="form-control" type="text" required>
+
+    <label for="album_genre">Genre</label>
+    <select name="album_genre" class="form-control" required>
+      <option value="Rock">Rock</option>
+      <option value="Pop">Pop</option>
+      <option value="Noise">Noise</option>
+      <option value="Metal">Metal</option>
+      <option value="Melodic">Melodic</option>
+      <option value="R&B">R&B</option>
+      <option value="Electronic">Electronic</option>
+      <option value="Punk">Punk</option>
+    </select>
   <button type="submit" class="btn">Go!</button>
 </form>
