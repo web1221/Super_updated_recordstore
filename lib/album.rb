@@ -39,9 +39,13 @@ class Album
     @@albums.delete(self.id)
   end
 
+  def self.sorted()
+    Album.all.sort_by { |album| album.name }
+  end
+
   def self.search(query)
     Album.all.select { |album| album.name.match?(/(#{query})/i)}
-    
+
   end
 
 end

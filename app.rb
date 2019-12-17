@@ -5,12 +5,12 @@ require('pry')
 also_reload('lib/**/*.rb')
 
 get('/') do
-  @albums = Album.all
+  @albums = Album.sorted
   erb(:albums)
 end
 
 get('/albums') do
-  @albums = Album.all
+  @albums = Album.sorted
   erb(:albums)
 end
 
@@ -18,7 +18,7 @@ post('/albums') do
   name = params[:album_name]
   album = Album.new(name, nil)
   album.save()
-  @albums = Album.all
+  @albums = Album.sorted
   erb(:albums)
 end
 
@@ -39,14 +39,14 @@ end
 patch('/albums/:id') do
   @album = Album.find(params[:id].to_i())
   @album.update(params[:name])
-  @albums = Album.all
+  @albums = Album.sorted
   erb(:albums)
 end
 
 delete('/albums/:id') do
   @album = Album.find(params[:id].to_i())
   @album.delete()
-  @albums = Album.all
+  @albums = Album.sorted
   erb(:albums)
 end
 
