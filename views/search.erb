@@ -1,16 +1,20 @@
 <h1>Primary Records</h1>
-<h3>Available Colors:</h3>
+
+<h3>You search the key word: <%= @search %></h3>
 
 <% if @albums.any? %>
   <ul>
     <% @albums.each do |album| %>
-    <li><a href="/albums/<%= album.id %>"><%= album.id %> <%= album.name %></a></li>
+    <li><a href="/albums/<%= album.id %>"><%= album.name %></a></li>
     <% end %>
   </ul>
 <% else %>
-<p>There are currently no records to display.</p>
+<p>Let's face it, your search returned no results.</p>
 <% end %>
-<a href="/albums/new">Add a new album</a>
+
+
+
+<h3>Want to search again? Enter the name of an album you would like to search:</h3>
 
 <form action="/search" method="get">
   <div class="form-group">

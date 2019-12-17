@@ -10,7 +10,8 @@ get('/') do
 end
 
 get('/albums') do
-  "This route will show a list of all albums."
+  @albums = Album.all
+  erb(:albums)
 end
 
 post('/albums') do
@@ -43,14 +44,14 @@ patch('/albums/:id') do
 end
 
 delete('/albums/:id') do
-
   @album = Album.find(params[:id].to_i())
   @album.delete()
   @albums = Album.all
   erb(:albums)
-
 end
 
-get('/custom_route') do
-  "We can even create custom routes, but we should only do this when needed."
+get('/search') do
+  @search = params[:query]
+  @albums = Album.search(params[:query])
+  erb(:search)
 end
