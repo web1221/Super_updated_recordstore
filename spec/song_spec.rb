@@ -92,7 +92,7 @@ describe '#Song' do
 
   describe('#songs') do
     it("returns an album's song") do
-      album = Album.new("Giant", nil)
+      album = Album.new("Giant Steps", "John Coltrane", 1930, "Jazz", nil)
       album.save()
       song = Song.new("Naima", album.id, nil)
       song.save()
