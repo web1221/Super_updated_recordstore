@@ -1,13 +1,17 @@
 require('sinatra')
 require('sinatra/reloader')
-require('./lib/album')
 require('pry')
+require('./lib/album')
+require('./lib/song')
 also_reload('lib/**/*.rb')
 
+# Root
 get('/') do
   @albums = Album.sorted
   erb(:albums)
 end
+
+#Album Requests
 
 get('/albums') do
   @albums = Album.sorted
@@ -44,8 +48,6 @@ patch('/albums/:id') do
   @album = Album.find(params[:id].to_i())
   @album.update(params[:album_name], params[:album_artist], params[:album_year], params[:album_genre])
 
-
-
   @albums = Album.sorted
   erb(:albums)
 end
@@ -61,4 +63,32 @@ get('/search') do
   @search = params[:query]
   @albums = Album.search(params[:query])
   erb(:search)
+end
+
+# Song Requests
+
+get('/albums/:id/songs/:song_id') do #Song Details
+  @song = Song.find(params[:song_id].to_i())
+  erb(:song)
+end
+
+post('/albums/:id/songs') do #add a new song
+  @album = Album.find(params[:id].to_i())
+  song = Song.new(params[:song_name], @album.id, nil)
+  song.save()
+  erb(:album)
+end
+
+patch('/albums/:id/songs/:song_id') do #update a single song
+  @album = Album.find(params[:id].to_i())
+  song = Song.find(params[:song_id].to_i())
+  song.update(params[:name], @album.id)
+  erb(:album)
+end
+
+delete('/albums/:id/songs/:song_id') do #delete a song from albums
+  song = Song.find(params[:song_id].to_i())
+  song.delete
+  @album = Album.find(params[:id].to_i())
+  erb(:album)
 end
